@@ -1077,6 +1077,25 @@ const state = {
 let imageBase64 = null;
 let currentTab = 'morning';
 
+
+// ── 총 수면 자동 계산 ──
+function calcSleepTotal() {
+  const bed = document.getElementById('bedtime').value;
+  const wake = document.getElementById('wake_time').value;
+  if (!bed || !wake) return;
+  const [bh, bm] = bed.split(':').map(Number);
+  const [wh, wm] = wake.split(':').map(Number);
+  let bedMins = bh * 60 + bm;
+  let wakeMins = wh * 60 + wm;
+  if (wakeMins <= bedMins) wakeMins += 24 * 60;
+  const total = wakeMins - bedMins;
+  state.sleep_total_min = total;
+  document.getElementById('sleep_total_min').value = total;
+  const h = Math.floor(total / 60);
+  const m = total % 60;
+  document.getElementById('sleep_total_display').textContent = h + '시간 ' + m + '분';
+}
+
 // ── INIT ──
 function getToday() {
   const d = new Date();
