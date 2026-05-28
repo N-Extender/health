@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#111111">
-  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Daily Log</title>
@@ -558,106 +555,28 @@ body {
 <!-- ===== PANEL: MORNING ===== -->
 <div class="panel active" id="panel-morning">
 
-  <!-- 가민 캡처 -->
-  <div class="section">
-    <div class="section-title" style="--section-color:var(--health)">
-      <div class="dot"></div>가민 캡처 자동 분석
-    </div>
-
-    <div class="field">
-      <div class="upload-zone" id="uploadZone">
-        <input type="file" accept="image/*" onchange="onImageSelect(event)" id="imgInput">
-        <div class="upload-icon">📷</div>
-        <div class="upload-text">가민 수면 화면 캡처 업로드</div>
-        <div class="upload-hint">탭하여 갤러리에서 선택</div>
-        <img class="preview-img" id="previewImg">
-      </div>
-      <button class="analyze-btn" id="analyzeBtn" onclick="analyzeImage()">자동 분석하기</button>
-      <div class="analyze-status" id="analyzeStatus"></div>
-      <div class="extracted-grid" id="extractedGrid" style="display:none"></div>
-    </div>
-  </div>
-
-  <!-- 📡 자동 추출된 값 수동 확인 -->
-  <div class="section">
-    <div class="section-title" style="--section-color:var(--health)">
-      <div class="dot"></div>📡 기기 수집 데이터
-    </div>
-
-    <div class="field">
-      <div class="field-label"><span class="badge badge-auto">AUTO</span> 수면 점수</div>
-      <div class="num-input">
-        <input type="number" id="sleep_score" placeholder="0~100" min="0" max="100">
-        <span class="num-unit">점</span>
-      </div>
-    </div>
-    <div class="field">
-      <div class="field-label"><span class="badge badge-auto">AUTO</span> 총 수면</div>
-      <div class="num-input">
-        <input type="number" id="sleep_total_min" placeholder="분">
-        <span class="num-unit">분</span>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> 깊은 수면</div>
-        <div class="num-input"><input type="number" id="sleep_deep_min" placeholder="분"><span class="num-unit">분</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> REM</div>
-        <div class="num-input"><input type="number" id="sleep_rem_min" placeholder="분"><span class="num-unit">분</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> 알음 수면</div>
-        <div class="num-input"><input type="number" id="sleep_light_min" placeholder="분"><span class="num-unit">분</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> 각성</div>
-        <div class="num-input"><input type="number" id="sleep_awake_min" placeholder="분"><span class="num-unit">분</span></div>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> HRV</div>
-        <div class="num-input"><input type="number" id="hrv_night_avg" placeholder="ms"><span class="num-unit">ms</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> 안정시 심박</div>
-        <div class="num-input"><input type="number" id="hr_resting" placeholder="bpm"><span class="num-unit">bpm</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> 밤사이 심박</div>
-        <div class="num-input"><input type="number" id="hr_night_avg" placeholder="bpm"><span class="num-unit">bpm</span></div>
-      </div>
-      <div class="field">
-        <div class="field-label"><span class="badge badge-auto">AUTO</span> 바디배터리 충전</div>
-        <div class="num-input"><input type="number" id="body_battery_charged" placeholder="+"><span class="num-unit"></span></div>
-      </div>
-    </div>
-    <div class="field">
-      <div class="field-label"><span class="badge badge-auto">AUTO</span> 바디배터리 아침</div>
-      <div class="num-input"><input type="number" id="body_battery_morning" placeholder="0~100"><span class="num-unit"></span></div>
-    </div>
-  </div>
-
-  <!-- ✏️ 수면 질 -->
+  <!-- 수면 -->
   <div class="section">
     <div class="section-title" style="--section-color:var(--morning)">
-      <div class="dot"></div>✏️ 수면 질
+      <div class="dot"></div>💤 수면
     </div>
-
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <div class="field">
         <div class="field-label">취침 시간</div>
-        <div class="time-input"><input type="time" id="bedtime"></div>
+        <div class="time-input"><input type="time" id="bedtime" onchange="calcSleepTotal()"></div>
       </div>
       <div class="field">
         <div class="field-label">기상 시간</div>
-        <div class="time-input"><input type="time" id="wake_time"></div>
+        <div class="time-input"><input type="time" id="wake_time" onchange="calcSleepTotal()"></div>
       </div>
     </div>
-
+    <div class="field">
+      <div class="field-label">총 수면 <span id="sleep_total_display" style="font-family:'DM Mono',monospace;color:var(--health);margin-left:6px;font-size:.75rem"></span></div>
+      <div class="num-input">
+        <input type="number" id="sleep_total_min" placeholder="자동 계산" readonly style="opacity:.6;cursor:default">
+        <span class="num-unit">분</span>
+      </div>
+    </div>
     <div class="field">
       <div class="field-label">기상 체감</div>
       <div class="slider-wrap">
@@ -668,7 +587,13 @@ body {
         <div class="slider-marks"><span>😴 1</span><span>3</span><span>5 😊</span></div>
       </div>
     </div>
+  </div>
 
+  <!-- 수면 질 -->
+  <div class="section">
+    <div class="section-title" style="--section-color:var(--morning)">
+      <div class="dot"></div>🌙 수면 질
+    </div>
     <div class="field">
       <div class="field-label">중간 각성 횟수</div>
       <div class="num-input">
@@ -676,7 +601,6 @@ body {
         <span class="num-unit">회</span>
       </div>
     </div>
-
     <div class="field">
       <div class="field-label">새벽 각성</div>
       <div class="yn-group">
@@ -700,12 +624,43 @@ body {
     </div>
   </div>
 
-  <!-- ✏️ 아침 컨디션 -->
+  <!-- 가민 -->
+  <div class="section">
+    <div class="section-title" style="--section-color:var(--health)">
+      <div class="dot"></div>⌚ Garmin (간밤 기준)
+    </div>
+    <div class="field">
+      <div class="field-label">수면 점수</div>
+      <div class="num-input">
+        <input type="number" id="sleep_score" placeholder="0~100" min="0" max="100">
+        <span class="num-unit">점</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="field">
+        <div class="field-label">심박변이도 (HRV)</div>
+        <div class="num-input"><input type="number" id="hrv_night_avg" placeholder="51"><span class="num-unit">ms</span></div>
+      </div>
+      <div class="field">
+        <div class="field-label">안정시 심박 (RHR)</div>
+        <div class="num-input"><input type="number" id="hr_resting" placeholder="49"><span class="num-unit">bpm</span></div>
+      </div>
+      <div class="field">
+        <div class="field-label">Body Battery 충전량</div>
+        <div class="num-input"><input type="number" id="body_battery_charged" placeholder="+44"><span class="num-unit"></span></div>
+      </div>
+      <div class="field">
+        <div class="field-label">Body Battery Morning</div>
+        <div class="num-input"><input type="number" id="body_battery_morning" placeholder="72"><span class="num-unit"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 아침 컨디션 -->
   <div class="section">
     <div class="section-title" style="--section-color:var(--morning)">
-      <div class="dot"></div>✏️ 아침 컨디션
+      <div class="dot"></div>☀️ 아침 컨디션
     </div>
-
     <div class="field">
       <div class="field-label">컨디션 점수</div>
       <div class="slider-wrap">
@@ -716,57 +671,76 @@ body {
         <div class="slider-marks"><span>1</span><span>5</span><span>10</span></div>
       </div>
     </div>
-
     <div class="field">
       <div class="field-label">에너지 느낌</div>
       <div class="btn-group" style="--opt-color:var(--morning)">
         <button class="btn-opt" onclick="setSingle('energy_feeling','가벼움',this)">가벼움</button>
+        <button class="btn-opt" onclick="setSingle('energy_feeling','에너지 있음',this)">에너지 있음</button>
         <button class="btn-opt selected" onclick="setSingle('energy_feeling','보통',this)">보통</button>
-        <button class="btn-opt" onclick="setSingle('energy_feeling','무거움',this)">무거움</button>
+        <button class="btn-opt" onclick="setSingle('energy_feeling','산만함',this)">산만함</button>
+        <button class="btn-opt" onclick="setSingle('energy_feeling','기운 없음',this)">기운 없음</button>
+        <button class="btn-opt" onclick="setSingle('energy_feeling','몸 무거움',this)">몸 무거움</button>
+        <button class="btn-opt" onclick="setSingle('energy_feeling','축 처짐',this)">축 처짐</button>
       </div>
     </div>
     <div class="field">
       <div class="field-label">집중 상태</div>
       <div class="btn-group" style="--opt-color:var(--morning)">
+        <button class="btn-opt" onclick="setSingle('focus_state','집중 잘 됨',this)">집중 잘 됨</button>
         <button class="btn-opt" onclick="setSingle('focus_state','또렷함',this)">또렷함</button>
         <button class="btn-opt selected" onclick="setSingle('focus_state','보통',this)">보통</button>
-        <button class="btn-opt" onclick="setSingle('focus_state','흐림',this)">흐림</button>
+        <button class="btn-opt" onclick="setSingle('focus_state','산만함',this)">산만함</button>
+        <button class="btn-opt" onclick="setSingle('focus_state','멍함',this)">멍함</button>
+        <button class="btn-opt" onclick="setSingle('focus_state','머리 느림',this)">머리 느림</button>
       </div>
     </div>
     <div class="field">
       <div class="field-label">감정 상태</div>
       <div class="btn-group" style="--opt-color:var(--morning)">
-        <button class="btn-opt" onclick="setSingle('mood','안정',this)">안정</button>
-        <button class="btn-opt selected" onclick="setSingle('mood','보통',this)">보통</button>
+        <button class="btn-opt" onclick="setSingle('mood','안정적',this)">안정적</button>
+        <button class="btn-opt selected" onclick="setSingle('mood','무덤덤',this)">무덤덤</button>
+        <button class="btn-opt" onclick="setSingle('mood','의욕 없음',this)">의욕 없음</button>
+        <button class="btn-opt" onclick="setSingle('mood','답답함',this)">답답함</button>
+        <button class="btn-opt" onclick="setSingle('mood','예민함',this)">예민함</button>
         <button class="btn-opt" onclick="setSingle('mood','불안',this)">불안</button>
-        <button class="btn-opt" onclick="setSingle('mood','예민',this)">예민</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="field-label">생리주기 단계</div>
-      <div class="btn-group">
-        <button class="btn-opt" style="--opt-color:#e06060" onclick="setSingle('cycle_phase','생리기',this)">🔴 생리기</button>
-        <button class="btn-opt" style="--opt-color:var(--money)" onclick="setSingle('cycle_phase','난포기',this)">🟡 난포기</button>
-        <button class="btn-opt" style="--opt-color:var(--health)" onclick="setSingle('cycle_phase','배란기',this)">🟢 배란기</button>
-        <button class="btn-opt" style="--opt-color:var(--growth)" onclick="setSingle('cycle_phase','황체기',this)">🟠 황체기</button>
       </div>
     </div>
   </div>
 
-  <!-- ✏️ 신체 -->
+  <!-- 신체 지표 -->
   <div class="section">
     <div class="section-title" style="--section-color:var(--health)">
-      <div class="dot"></div>✏️ 신체 지표
+      <div class="dot"></div>📊 신체 지표
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <div class="field">
-        <div class="field-label"><span class="badge badge-manual">수동</span> 몸무게</div>
+        <div class="field-label">몸무게</div>
         <div class="num-input"><input type="number" id="weight_kg" placeholder="56.8" step="0.1"><span class="num-unit">kg</span></div>
       </div>
       <div class="field">
-        <div class="field-label"><span class="badge badge-manual">수동</span> 허리둘레</div>
+        <div class="field-label">허리둘레</div>
         <div class="num-input"><input type="number" id="waist_cm" placeholder="67.0" step="0.1"><span class="num-unit">cm</span></div>
+      </div>
+    </div>
+    <div class="field">
+      <div class="field-label">생리주기 단계</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <button class="btn-opt cycle-btn" style="--opt-color:#e06060;text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','생리기',this)">
+          <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🔴 생리기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(1~5일)</span></div>
+          <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 낮음, 회복 집중</div>
+        </button>
+        <button class="btn-opt cycle-btn" style="--opt-color:var(--money);text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','난포기',this)">
+          <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🟡 난포기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(6~13일)</span></div>
+          <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 상승, 학습·도전 최적</div>
+        </button>
+        <button class="btn-opt cycle-btn" style="--opt-color:var(--health);text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','배란기',this)">
+          <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🟢 배란기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(14~16일)</span></div>
+          <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 피크, 사회·관계 활발</div>
+        </button>
+        <button class="btn-opt cycle-btn" style="--opt-color:var(--growth);text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','황체기',this)">
+          <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🟠 황체기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(17~28일)</span></div>
+          <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 변동, PMS 주의</div>
+        </button>
       </div>
     </div>
   </div>
@@ -1155,46 +1129,21 @@ async function analyzeImage() {
   status.textContent = '분석 중...';
 
   try {
-    const res = await fetch(CLAUDE_API, {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/analyze-image`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{
-          role: 'user',
-          content: [
-            {
-              type: 'image',
-              source: { type: 'base64', media_type: 'image/jpeg', data: imageBase64 }
-            },
-            {
-              type: 'text',
-              text: `이 가민(Garmin) 또는 삼성 헬스 앱 화면에서 수치를 추출해주세요.
-JSON 형식으로만 응답하세요. 없는 값은 null로:
-{
-  "sleep_score": 숫자,
-  "sleep_total_min": 숫자(분),
-  "sleep_deep_min": 숫자(분),
-  "sleep_light_min": 숫자(분),
-  "sleep_rem_min": 숫자(분),
-  "sleep_awake_min": 숫자(분),
-  "hr_night_avg": 숫자,
-  "hr_resting": 숫자,
-  "hrv_night_avg": 숫자,
-  "body_battery_charged": 숫자,
-  "body_battery_morning": 숫자
-}
-시간 표기(예: 7h 31분)는 분으로 변환해주세요.`
-            }
-          ]
-        }]
-      })
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      },
+      body: JSON.stringify({ imageBase64, mediaType: 'image/jpeg' })
     });
-    const data = await res.json();
-    const text = data.content[0].text;
-    const clean = text.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(clean);
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(errText);
+    }
+    const parsed = await res.json();
+    if (parsed.error) throw new Error(parsed.error);
 
     // 상태에 반영
     const fieldMap = {
@@ -1315,11 +1264,20 @@ async function saveAll() {
   if (!payload.stress_source || payload.stress_source.length === 0) payload.stress_source = null;
 
   try {
-    await supaFetch('/daily_log', {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/daily_log`, {
       method: 'POST',
-      body: JSON.stringify(payload),
-      headers: { 'Prefer': 'resolution=merge-duplicates' }
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates,return=representation'
+      },
+      body: JSON.stringify(payload)
     });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err);
+    }
     showToast('✓ 저장되었습니다');
   } catch(e) {
     showToast('저장 실패: ' + e.message.slice(0,40));
