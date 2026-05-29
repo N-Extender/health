@@ -677,35 +677,35 @@ body {
     <div class="field">
       <div class="field-label">에너지 느낌</div>
       <div class="btn-group" style="--opt-color:var(--morning)">
-        <button class="btn-opt" onclick="setSingle('energy_feeling','가벼움',this)">가벼움</button>
-        <button class="btn-opt" onclick="setSingle('energy_feeling','에너지 있음',this)">에너지 있음</button>
-        <button class="btn-opt selected" onclick="setSingle('energy_feeling','보통',this)">보통</button>
-        <button class="btn-opt" onclick="setSingle('energy_feeling','산만함',this)">산만함</button>
-        <button class="btn-opt" onclick="setSingle('energy_feeling','기운 없음',this)">기운 없음</button>
-        <button class="btn-opt" onclick="setSingle('energy_feeling','몸 무거움',this)">몸 무거움</button>
-        <button class="btn-opt" onclick="setSingle('energy_feeling','축 처짐',this)">축 처짐</button>
+        <button class="btn-opt" data-key="energy_feeling" data-val="가벼움" onclick="setSingle('energy_feeling','가벼움',this)">가벼움</button>
+        <button class="btn-opt" data-key="energy_feeling" data-val="에너지 있음" onclick="setSingle('energy_feeling','에너지 있음',this)">에너지 있음</button>
+        <button class="btn-opt" data-key="energy_feeling" data-val="보통" onclick="setSingle('energy_feeling','보통',this)">보통</button>
+        <button class="btn-opt" data-key="energy_feeling" data-val="산만함" onclick="setSingle('energy_feeling','산만함',this)">산만함</button>
+        <button class="btn-opt" data-key="energy_feeling" data-val="기운 없음" onclick="setSingle('energy_feeling','기운 없음',this)">기운 없음</button>
+        <button class="btn-opt" data-key="energy_feeling" data-val="몸 무거움" onclick="setSingle('energy_feeling','몸 무거움',this)">몸 무거움</button>
+        <button class="btn-opt" data-key="energy_feeling" data-val="축 처짐" onclick="setSingle('energy_feeling','축 처짐',this)">축 처짐</button>
       </div>
     </div>
     <div class="field">
       <div class="field-label">집중 상태</div>
       <div class="btn-group" style="--opt-color:var(--morning)">
-        <button class="btn-opt" onclick="setSingle('focus_state','집중 잘 됨',this)">집중 잘 됨</button>
-        <button class="btn-opt" onclick="setSingle('focus_state','또렷함',this)">또렷함</button>
-        <button class="btn-opt selected" onclick="setSingle('focus_state','보통',this)">보통</button>
-        <button class="btn-opt" onclick="setSingle('focus_state','산만함',this)">산만함</button>
-        <button class="btn-opt" onclick="setSingle('focus_state','멍함',this)">멍함</button>
-        <button class="btn-opt" onclick="setSingle('focus_state','머리 느림',this)">머리 느림</button>
+        <button class="btn-opt" data-key="focus_state" data-val="집중 잘 됨" onclick="setSingle('focus_state','집중 잘 됨',this)">집중 잘 됨</button>
+        <button class="btn-opt" data-key="focus_state" data-val="또렷함" onclick="setSingle('focus_state','또렷함',this)">또렷함</button>
+        <button class="btn-opt" data-key="focus_state" data-val="보통" onclick="setSingle('focus_state','보통',this)">보통</button>
+        <button class="btn-opt" data-key="focus_state" data-val="산만함" onclick="setSingle('focus_state','산만함',this)">산만함</button>
+        <button class="btn-opt" data-key="focus_state" data-val="멍함" onclick="setSingle('focus_state','멍함',this)">멍함</button>
+        <button class="btn-opt" data-key="focus_state" data-val="머리 느림" onclick="setSingle('focus_state','머리 느림',this)">머리 느림</button>
       </div>
     </div>
     <div class="field">
       <div class="field-label">감정 상태</div>
       <div class="btn-group" style="--opt-color:var(--morning)">
-        <button class="btn-opt" onclick="setSingle('mood','안정적',this)">안정적</button>
-        <button class="btn-opt selected" onclick="setSingle('mood','무덤덤',this)">무덤덤</button>
-        <button class="btn-opt" onclick="setSingle('mood','의욕 없음',this)">의욕 없음</button>
-        <button class="btn-opt" onclick="setSingle('mood','답답함',this)">답답함</button>
-        <button class="btn-opt" onclick="setSingle('mood','예민함',this)">예민함</button>
-        <button class="btn-opt" onclick="setSingle('mood','불안',this)">불안</button>
+        <button class="btn-opt" data-key="mood" data-val="안정적" onclick="setSingle('mood','안정적',this)">안정적</button>
+        <button class="btn-opt" data-key="mood" data-val="무덤덤" onclick="setSingle('mood','무덤덤',this)">무덤덤</button>
+        <button class="btn-opt" data-key="mood" data-val="의욕 없음" onclick="setSingle('mood','의욕 없음',this)">의욕 없음</button>
+        <button class="btn-opt" data-key="mood" data-val="답답함" onclick="setSingle('mood','답답함',this)">답답함</button>
+        <button class="btn-opt" data-key="mood" data-val="예민함" onclick="setSingle('mood','예민함',this)">예민함</button>
+        <button class="btn-opt" data-key="mood" data-val="불안" onclick="setSingle('mood','불안',this)">불안</button>
       </div>
     </div>
   </div>
@@ -728,19 +728,19 @@ body {
     <div class="field">
       <div class="field-label">생리주기 단계</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn-opt cycle-btn" style="--opt-color:#e06060;text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','생리기',this)">
+        <button class="btn-opt cycle-btn" style="--opt-color:#e06060;text-align:left;border-radius:6px;padding:10px 14px" data-key="cycle_phase" data-val="생리기" onclick="setSingle('cycle_phase','생리기',this)">
           <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🔴 생리기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(1~5일)</span></div>
           <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 낮음, 회복 집중</div>
         </button>
-        <button class="btn-opt cycle-btn" style="--opt-color:var(--money);text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','난포기',this)">
+        <button class="btn-opt cycle-btn" style="--opt-color:var(--money);text-align:left;border-radius:6px;padding:10px 14px" data-key="cycle_phase" data-val="난포기" onclick="setSingle('cycle_phase','난포기',this)">
           <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🟡 난포기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(6~13일)</span></div>
           <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 상승, 학습·도전 최적</div>
         </button>
-        <button class="btn-opt cycle-btn" style="--opt-color:var(--health);text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','배란기',this)">
+        <button class="btn-opt cycle-btn" style="--opt-color:var(--health);text-align:left;border-radius:6px;padding:10px 14px" data-key="cycle_phase" data-val="배란기" onclick="setSingle('cycle_phase','배란기',this)">
           <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🟢 배란기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(14~16일)</span></div>
           <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 피크, 사회·관계 활발</div>
         </button>
-        <button class="btn-opt cycle-btn" style="--opt-color:var(--growth);text-align:left;border-radius:6px;padding:10px 14px" onclick="setSingle('cycle_phase','황체기',this)">
+        <button class="btn-opt cycle-btn" style="--opt-color:var(--growth);text-align:left;border-radius:6px;padding:10px 14px" data-key="cycle_phase" data-val="황체기" onclick="setSingle('cycle_phase','황체기',this)">
           <div style="font-size:.78rem;color:inherit;margin-bottom:2px">🟠 황체기 <span style="font-family:'DM Mono',monospace;font-size:.62rem;opacity:.7">(17~28일)</span></div>
           <div style="font-size:.65rem;color:var(--muted);font-weight:normal">에너지 변동, PMS 주의</div>
         </button>
@@ -754,27 +754,27 @@ body {
         <div>
           <div class="field-label" style="margin-bottom:7px">명치</div>
           <div class="btn-group" style="--opt-color:var(--health)">
-            <button class="btn-opt" onclick="setSingle('digestion_chest','괜찮음',this)">😀 괜찮음</button>
-            <button class="btn-opt" onclick="setSingle('digestion_chest','불편함',this)">😐 불편함</button>
+            <button class="btn-opt" data-key="digestion_chest" data-val="괜찮음" onclick="setSingle('digestion_chest','괜찮음',this)">😀 괜찮음</button>
+            <button class="btn-opt" data-key="digestion_chest" data-val="불편함" onclick="setSingle('digestion_chest','불편함',this)">😐 불편함</button>
           </div>
         </div>
 
         <div>
           <div class="field-label" style="margin-bottom:7px">식도</div>
           <div class="btn-group" style="--opt-color:var(--health)">
-            <button class="btn-opt" onclick="setSingle('digestion_esophagus','괜찮음',this)">😀 괜찮음</button>
-            <button class="btn-opt" onclick="setSingle('digestion_esophagus','긁힘/역류',this)">😐 긁힘/역류</button>
+            <button class="btn-opt" data-key="digestion_esophagus" data-val="괜찮음" onclick="setSingle('digestion_esophagus','괜찮음',this)">😀 괜찮음</button>
+            <button class="btn-opt" data-key="digestion_esophagus" data-val="긁힘/역류" onclick="setSingle('digestion_esophagus','긁힘/역류',this)">😐 긁힘/역류</button>
           </div>
         </div>
 
         <div>
           <div class="field-label" style="margin-bottom:7px">전날</div>
           <div class="btn-group" style="--opt-color:var(--stress)">
-            <button class="btn-opt" onclick="toggleMulti('digestion_yesterday','커피',this)">☕ 커피</button>
-            <button class="btn-opt" onclick="toggleMulti('digestion_yesterday','늦은식사',this)">🌙 늦은식사</button>
-            <button class="btn-opt" onclick="toggleMulti('digestion_yesterday','과식',this)">🍟 과식</button>
-            <button class="btn-opt" onclick="toggleMulti('digestion_yesterday','음주',this)">🍺 음주</button>
-            <button class="btn-opt" onclick="toggleMulti('digestion_yesterday','괜찮았음',this)">👍 괜찮았음</button>
+            <button class="btn-opt" data-mkey="digestion_yesterday" data-mval="커피" onclick="toggleMulti('digestion_yesterday','커피',this)">☕ 커피</button>
+            <button class="btn-opt" data-mkey="digestion_yesterday" data-mval="늦은식사" onclick="toggleMulti('digestion_yesterday','늦은식사',this)">🌙 늦은식사</button>
+            <button class="btn-opt" data-mkey="digestion_yesterday" data-mval="과식" onclick="toggleMulti('digestion_yesterday','과식',this)">🍟 과식</button>
+            <button class="btn-opt" data-mkey="digestion_yesterday" data-mval="음주" onclick="toggleMulti('digestion_yesterday','음주',this)">🍺 음주</button>
+            <button class="btn-opt" data-mkey="digestion_yesterday" data-mval="괜찮았음" onclick="toggleMulti('digestion_yesterday','괜찮았음',this)">👍 괜찮았음</button>
           </div>
         </div>
 
@@ -805,9 +805,9 @@ body {
     <div class="field">
       <div class="field-label">종류</div>
       <div class="btn-group" style="--opt-color:var(--day)">
-        <button class="btn-opt" onclick="setSingle('caffeine_type','아메리카노',this)">아메리카노</button>
-        <button class="btn-opt" onclick="setSingle('caffeine_type','라떼',this)">라떼</button>
-        <button class="btn-opt" onclick="setSingle('caffeine_type','기타',this)">기타</button>
+        <button class="btn-opt" data-key="caffeine_type" data-val="아메리카노" onclick="setSingle('caffeine_type','아메리카노',this)">아메리카노</button>
+        <button class="btn-opt" data-key="caffeine_type" data-val="라떼" onclick="setSingle('caffeine_type','라떼',this)">라떼</button>
+        <button class="btn-opt" data-key="caffeine_type" data-val="기타" onclick="setSingle('caffeine_type','기타',this)">기타</button>
       </div>
     </div>
   </div>
@@ -824,9 +824,9 @@ body {
     <div class="field">
       <div class="field-label">취침 전 공복감</div>
       <div class="btn-group" style="--opt-color:var(--day)">
-        <button class="btn-opt" onclick="setSingle('hunger_before_bed','낮음',this)">낮음</button>
-        <button class="btn-opt selected" onclick="setSingle('hunger_before_bed','보통',this)">보통</button>
-        <button class="btn-opt" onclick="setSingle('hunger_before_bed','높음',this)">높음</button>
+        <button class="btn-opt" data-key="hunger_before_bed" data-val="낮음" onclick="setSingle('hunger_before_bed','낮음',this)">낮음</button>
+        <button class="btn-opt" data-key="hunger_before_bed" data-val="보통" onclick="setSingle('hunger_before_bed','보통',this)">보통</button>
+        <button class="btn-opt" data-key="hunger_before_bed" data-val="높음" onclick="setSingle('hunger_before_bed','높음',this)">높음</button>
       </div>
     </div>
     <div class="field">
@@ -863,20 +863,20 @@ body {
     <div class="field">
       <div class="field-label">운동 종류</div>
       <div class="btn-group" style="--opt-color:var(--day)">
-        <button class="btn-opt" onclick="setSingle('exercise_type','필라테스',this)">필라테스</button>
-        <button class="btn-opt" onclick="setSingle('exercise_type','러닝',this)">러닝</button>
-        <button class="btn-opt" onclick="setSingle('exercise_type','걷기',this)">걷기</button>
-        <button class="btn-opt" onclick="setSingle('exercise_type','수영',this)">수영</button>
-        <button class="btn-opt" onclick="setSingle('exercise_type','요가',this)">요가</button>
-        <button class="btn-opt" onclick="setSingle('exercise_type','기타',this)">기타</button>
+        <button class="btn-opt" data-key="exercise_type" data-val="필라테스" onclick="setSingle('exercise_type','필라테스',this)">필라테스</button>
+        <button class="btn-opt" data-key="exercise_type" data-val="러닝" onclick="setSingle('exercise_type','러닝',this)">러닝</button>
+        <button class="btn-opt" data-key="exercise_type" data-val="걷기" onclick="setSingle('exercise_type','걷기',this)">걷기</button>
+        <button class="btn-opt" data-key="exercise_type" data-val="수영" onclick="setSingle('exercise_type','수영',this)">수영</button>
+        <button class="btn-opt" data-key="exercise_type" data-val="요가" onclick="setSingle('exercise_type','요가',this)">요가</button>
+        <button class="btn-opt" data-key="exercise_type" data-val="기타" onclick="setSingle('exercise_type','기타',this)">기타</button>
       </div>
     </div>
     <div class="field">
       <div class="field-label">운동 강도</div>
       <div class="btn-group" style="--opt-color:var(--day)">
-        <button class="btn-opt" onclick="setSingle('exercise_intensity','가벼움',this)">가벼움</button>
-        <button class="btn-opt selected" onclick="setSingle('exercise_intensity','보통',this)">보통</button>
-        <button class="btn-opt" onclick="setSingle('exercise_intensity','강함',this)">강함</button>
+        <button class="btn-opt" data-key="exercise_intensity" data-val="가벼움" onclick="setSingle('exercise_intensity','가벼움',this)">가벼움</button>
+        <button class="btn-opt" data-key="exercise_intensity" data-val="보통" onclick="setSingle('exercise_intensity','보통',this)">보통</button>
+        <button class="btn-opt" data-key="exercise_intensity" data-val="강함" onclick="setSingle('exercise_intensity','강함',this)">강함</button>
       </div>
     </div>
     <div class="field">
@@ -897,12 +897,12 @@ body {
     <div class="field">
       <div class="field-label">해당 항목 모두 선택</div>
       <div class="multi-group" id="stressSource">
-        <button class="multi-btn" onclick="toggleMulti('stress_source','업무',this)">업무</button>
-        <button class="multi-btn" onclick="toggleMulti('stress_source','인간관계',this)">인간관계</button>
-        <button class="multi-btn" onclick="toggleMulti('stress_source','미래 고민',this)">미래 고민</button>
-        <button class="multi-btn" onclick="toggleMulti('stress_source','재정',this)">재정</button>
-        <button class="multi-btn" onclick="toggleMulti('stress_source','건강',this)">건강</button>
-        <button class="multi-btn" onclick="toggleMulti('stress_source','기타',this)">기타</button>
+        <button class="multi-btn" data-mkey="stress_source" data-mval="업무" onclick="toggleMulti('stress_source','업무',this)">업무</button>
+        <button class="multi-btn" data-mkey="stress_source" data-mval="인간관계" onclick="toggleMulti('stress_source','인간관계',this)">인간관계</button>
+        <button class="multi-btn" data-mkey="stress_source" data-mval="미래 고민" onclick="toggleMulti('stress_source','미래 고민',this)">미래 고민</button>
+        <button class="multi-btn" data-mkey="stress_source" data-mval="재정" onclick="toggleMulti('stress_source','재정',this)">재정</button>
+        <button class="multi-btn" data-mkey="stress_source" data-mval="건강" onclick="toggleMulti('stress_source','건강',this)">건강</button>
+        <button class="multi-btn" data-mkey="stress_source" data-mval="기타" onclick="toggleMulti('stress_source','기타',this)">기타</button>
       </div>
     </div>
   </div>
@@ -1072,12 +1072,12 @@ const state = {
   wake_feeling: 3, night_wakeup_count: null,
   early_wakeup: false, hard_to_sleep_again: false, many_dreams: false,
   condition_score: 5,
-  energy_feeling: '보통', focus_state: '보통', mood: '보통',
+  energy_feeling: null, focus_state: null, mood: null,
   cycle_phase: null,
   caffeine_time: null, caffeine_type: null, caffeine_cups: null,
-  dinner_time: null, hunger_before_bed: '보통',
+  dinner_time: null, hunger_before_bed: null,
   late_night_snack: false, excess_water: false,
-  exercise_min: null, exercise_type: null, exercise_intensity: '보통',
+  exercise_min: null, exercise_type: null, exercise_intensity: null,
   sunlight_min: null,
   stress_source: [],
   recovery_walk: false, recovery_stretch: false,
@@ -1092,6 +1092,7 @@ const state = {
 
 let imageBase64 = null;
 let currentTab = 'morning';
+let editingDate = null; // 편집 중인 날짜 (null이면 오늘)
 
 
 // ── 총 수면 자동 계산 ──
@@ -1126,6 +1127,17 @@ function formatDateKR(s) {
 }
 
 document.getElementById('dateLabel').textContent = formatDateKR(getToday());
+
+function updateEditingBanner() {
+  const banner = document.getElementById('editingBanner');
+  if (editingDate && editingDate !== getToday()) {
+    banner.textContent = '✏️ ' + formatDateKR(editingDate) + ' 수정 중';
+    banner.style.display = 'block';
+  } else {
+    banner.style.display = 'none';
+    editingDate = null;
+  }
+}
 loadToday();
 
 // ── TAB ──
@@ -1295,6 +1307,31 @@ async function supaFetch(path, options = {}) {
   return res.json().catch(() => null);
 }
 
+async function loadDateData(dateStr) {
+  // state 초기화
+  Object.keys(state).forEach(k => {
+    if (typeof state[k] === 'boolean') state[k] = false;
+    else if (Array.isArray(state[k])) state[k] = [];
+    else if (typeof state[k] === 'number') state[k] = (k.includes('feeling') || k.includes('score') || k.includes('stimulation') || k.includes('thinking') || k.includes('tension')) ? 3 : null;
+    else state[k] = null;
+  });
+  state.wake_feeling = 3;
+  state.condition_score = 5;
+  state.digital_stimulation = 3;
+  state.overthinking = 3;
+  state.tension = 3;
+
+  try {
+    const data = await supaFetch('/daily_log?date=eq.' + dateStr + '&select=*');
+    if (data && data.length > 0) {
+      applyData(data[0]);
+    }
+  } catch(e) { console.error(e); }
+  editingDate = dateStr;
+  updateEditingBanner();
+  switchTab('morning');
+}
+
 async function loadToday() {
   const today = getToday();
   try {
@@ -1307,42 +1344,43 @@ async function loadToday() {
 }
 
 function applyData(d) {
+  // state 갱신
   for (const [key, val] of Object.entries(d)) {
     if (val === null || val === undefined) continue;
     if (key in state) state[key] = val;
-    const el = document.getElementById(key);
-    if (el) {
-      if (el.type === 'range' || el.type === 'number' || el.type === 'time') {
-        el.value = val;
-      }
-    }
   }
 
-  // 슬라이더 업데이트
-  ['wake_feeling','condition_score','digital_stimulation','overthinking','tension'].forEach(k => {
-    const el = document.getElementById(k);
-    if (el) el.value = state[k];
+  // 숫자·시간 input 복원
+  document.querySelectorAll('input[type=number], input[type=time]').forEach(inp => {
+    if (inp.id in state && state[inp.id] !== null) inp.value = state[inp.id];
   });
-  document.getElementById('wfv').textContent = state.wake_feeling;
-  document.getElementById('csv').textContent = state.condition_score;
-  document.getElementById('dsv').textContent = state.digital_stimulation;
-  document.getElementById('otv').textContent = state.overthinking;
-  document.getElementById('tnv').textContent = state.tension;
 
-  // 단일 선택 버튼 복원 (setSingle 계열)
-  const singleKeys = ['energy_feeling','focus_state','mood','cycle_phase',
-    'caffeine_type','hunger_before_bed','exercise_type','exercise_intensity',
-    'digestion_chest','digestion_esophagus'];
-  singleKeys.forEach(key => {
-    if (!state[key]) return;
-    document.querySelectorAll('.btn-opt').forEach(btn => {
-      const oc = btn.getAttribute('onclick') || '';
-      if (oc.includes("setSingle") && oc.includes("'" + key + "'") && oc.includes("'" + state[key] + "'")) {
-        btn.classList.add('selected');
-        btn.setAttribute('data-selected-key', key);
-        btn.setAttribute('data-selected-val', state[key]);
-      }
-    });
+  // 슬라이더 복원
+  const sliders = {
+    wake_feeling: 'wfv', condition_score: 'csv',
+    digital_stimulation: 'dsv', overthinking: 'otv', tension: 'tnv'
+  };
+  Object.entries(sliders).forEach(([id, valId]) => {
+    const el = document.getElementById(id);
+    if (el && state[id] !== null) {
+      el.value = state[id];
+      document.getElementById(valId).textContent = state[id];
+    }
+  });
+
+  // 단일 선택 버튼 복원 (data-key 기반 — 정확한 매칭)
+  document.querySelectorAll('.btn-opt').forEach(btn => {
+    btn.classList.remove('selected');
+    btn.removeAttribute('data-selected-key');
+  });
+  document.querySelectorAll('[data-key]').forEach(btn => {
+    const key = btn.getAttribute('data-key');
+    const val = btn.getAttribute('data-val');
+    if (state[key] !== null && state[key] === val) {
+      btn.classList.add('selected');
+      btn.setAttribute('data-selected-key', key);
+      btn.setAttribute('data-selected-val', val);
+    }
   });
 
   // Y/N 버튼 복원
@@ -1354,35 +1392,37 @@ function applyData(d) {
     const val = state[key] ? 'Y' : 'N';
     document.querySelectorAll('.yn-btn').forEach(btn => {
       const oc = btn.getAttribute('onclick') || '';
-      if (oc.includes("'" + key + "'") && oc.includes("'" + val + "'")) {
+      if (oc.includes("'" + key + "'")) {
         btn.classList.remove('y-selected','n-selected');
-        btn.classList.add(val === 'Y' ? 'y-selected' : 'n-selected');
+        if (oc.includes("'" + val + "'")) {
+          btn.classList.add(val === 'Y' ? 'y-selected' : 'n-selected');
+        }
       }
     });
   });
 
-  // 다중 선택 버튼 복원 (toggleMulti 계열)
-  const multiKeys = ['stress_source','digestion_yesterday'];
-  multiKeys.forEach(key => {
+  // 다중 선택 버튼 복원 (data-mkey 기반)
+  document.querySelectorAll('[data-mkey]').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+  ['stress_source','digestion_yesterday'].forEach(key => {
     if (!state[key] || !Array.isArray(state[key])) return;
-    state[key].forEach(val => {
-      document.querySelectorAll('.btn-opt, .multi-btn').forEach(btn => {
-        const oc = btn.getAttribute('onclick') || '';
-        if (oc.includes("toggleMulti") && oc.includes("'" + key + "'") && oc.includes("'" + val + "'")) {
-          btn.classList.add('selected');
-          btn.setAttribute('data-multi-key', key);
-          btn.setAttribute('data-multi-val', val);
-        }
-      });
+    document.querySelectorAll('[data-mkey="' + key + '"]').forEach(btn => {
+      const val = btn.getAttribute('data-mval');
+      if (state[key].includes(val)) {
+        btn.classList.add('selected');
+      }
     });
   });
 
-  // 총 수면 시간 표시 복원
+  // 총 수면 시간 표시
   if (state.sleep_total_min) {
     const h = Math.floor(state.sleep_total_min / 60);
     const m = state.sleep_total_min % 60;
-    const displayEl = document.getElementById('sleep_total_display');
-    if (displayEl) displayEl.textContent = h + '시간 ' + m + '분';
+    const el = document.getElementById('sleep_total_display');
+    if (el) el.textContent = h + '시간 ' + m + '분';
+    const el2 = document.getElementById('sleep_total_min');
+    if (el2) el2.value = state.sleep_total_min;
   }
 }
 
@@ -1420,7 +1460,7 @@ async function saveAll() {
   Object.keys(state).forEach(k => {
     payload[k] = state[k];
   });
-  payload.date = getToday();
+  payload.date = editingDate || getToday();
 
   // 5. 빈 배열 → null
   if (!payload.stress_source || payload.stress_source.length === 0) payload.stress_source = null;
@@ -1460,7 +1500,9 @@ async function saveAll() {
       const err = await res.text();
       throw new Error(err);
     }
-    showToast('✓ 저장되었습니다');
+    showToast('✓ ' + (editingDate || getToday()) + ' 저장');
+    editingDate = null;
+    updateEditingBanner();
   } catch(e) {
     showToast('저장 실패: ' + e.message.slice(0,60));
     console.error('저장 오류:', e);
@@ -1531,7 +1573,8 @@ async function renderHistory() {
             ${d.mood ? `<span class="tag" style="--tag-color:var(--morning)">${d.mood}</span>` : ''}
             ${d.exercise_type ? `<span class="tag" style="--tag-color:var(--day)">${d.exercise_type} ${d.exercise_min||''}분</span>` : ''}
           </div>
-          <button onclick="exportSingleMD('${d.date}')" style="font-family:'DM Mono',monospace;font-size:.62rem;padding:5px 12px;background:none;border:1px solid var(--border2);border-radius:3px;color:var(--muted);cursor:pointer" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">📄 .md 내보내기</button>
+          <button onclick="exportSingleMD('${d.date}')" style="font-family:'DM Mono',monospace;font-size:.62rem;padding:5px 12px;background:none;border:1px solid var(--border2);border-radius:3px;color:var(--muted);cursor:pointer" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">📄 .md</button>
+          <button onclick="loadDateData(\'${d.date}\')" style="font-family:\'DM Mono\',monospace;font-size:.62rem;padding:5px 12px;background:none;border:1px solid var(--morning);border-radius:3px;color:var(--morning);cursor:pointer;margin-left:4px">✏️ 수정</button>
         </div>
       </div>
     `).join('');
