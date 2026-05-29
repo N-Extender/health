@@ -1317,6 +1317,7 @@ function applyData(d) {
       }
     }
   }
+
   // 슬라이더 업데이트
   ['wake_feeling','condition_score','digital_stimulation','overthinking','tension'].forEach(k => {
     const el = document.getElementById(k);
@@ -1327,6 +1328,62 @@ function applyData(d) {
   document.getElementById('dsv').textContent = state.digital_stimulation;
   document.getElementById('otv').textContent = state.overthinking;
   document.getElementById('tnv').textContent = state.tension;
+
+  // 단일 선택 버튼 복원 (setSingle 계열)
+  const singleKeys = ['energy_feeling','focus_state','mood','cycle_phase',
+    'caffeine_type','hunger_before_bed','exercise_type','exercise_intensity',
+    'digestion_chest','digestion_esophagus'];
+  singleKeys.forEach(key => {
+    if (!state[key]) return;
+    document.querySelectorAll('.btn-opt').forEach(btn => {
+      const oc = btn.getAttribute('onclick') || '';
+      if (oc.includes("setSingle") && oc.includes("'" + key + "'") && oc.includes("'" + state[key] + "'")) {
+        btn.classList.add('selected');
+        btn.setAttribute('data-selected-key', key);
+        btn.setAttribute('data-selected-val', state[key]);
+      }
+    });
+  });
+
+  // Y/N 버튼 복원
+  const ynKeys = ['early_wakeup','hard_to_sleep_again','many_dreams',
+    'late_night_snack','excess_water','recovery_walk','recovery_stretch',
+    'recovery_spacing','recovery_reading','mental_browsing'];
+  ynKeys.forEach(key => {
+    if (state[key] === null || state[key] === undefined) return;
+    const val = state[key] ? 'Y' : 'N';
+    document.querySelectorAll('.yn-btn').forEach(btn => {
+      const oc = btn.getAttribute('onclick') || '';
+      if (oc.includes("'" + key + "'") && oc.includes("'" + val + "'")) {
+        btn.classList.remove('y-selected','n-selected');
+        btn.classList.add(val === 'Y' ? 'y-selected' : 'n-selected');
+      }
+    });
+  });
+
+  // 다중 선택 버튼 복원 (toggleMulti 계열)
+  const multiKeys = ['stress_source','digestion_yesterday'];
+  multiKeys.forEach(key => {
+    if (!state[key] || !Array.isArray(state[key])) return;
+    state[key].forEach(val => {
+      document.querySelectorAll('.btn-opt, .multi-btn').forEach(btn => {
+        const oc = btn.getAttribute('onclick') || '';
+        if (oc.includes("toggleMulti") && oc.includes("'" + key + "'") && oc.includes("'" + val + "'")) {
+          btn.classList.add('selected');
+          btn.setAttribute('data-multi-key', key);
+          btn.setAttribute('data-multi-val', val);
+        }
+      });
+    });
+  });
+
+  // 총 수면 시간 표시 복원
+  if (state.sleep_total_min) {
+    const h = Math.floor(state.sleep_total_min / 60);
+    const m = state.sleep_total_min % 60;
+    const displayEl = document.getElementById('sleep_total_display');
+    if (displayEl) displayEl.textContent = h + '시간 ' + m + '분';
+  }
 }
 
 async function saveAll() {
