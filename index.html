@@ -1334,44 +1334,52 @@ async function saveAll() {
   btn.disabled = true;
   btn.textContent = '저장 중...';
 
-  // 숫자·시간 입력값 동기화
+  // 1. 숫자·시간 input 동기화
   document.querySelectorAll('input[type=number], input[type=time]').forEach(inp => {
     if (inp.id in state) {
-      state[inp.id] = inp.value ? (inp.type === 'number' ? parseFloat(inp.value) : inp.value) : null;
+      state[inp.id] = inp.value !== '' ? (inp.type === 'number' ? parseFloat(inp.value) : inp.value) : null;
     }
   });
-  // 버튼 선택값 동기화 - data속성 + state 직접 확인
-  document.querySelectorAll('.btn-opt.selected[data-selected-key]').forEach(btn => {
-    const key = btn.getAttribute('data-selected-key');
-    const val = btn.getAttribute('data-selected-val');
-    if (key && val) state[key] = val;
-  });
-  // toggleMulti 다중선택 동기화
-  document.querySelectorAll('.btn-opt.selected[data-multi-key]').forEach(btn => {
-    const key = btn.getAttribute('data-multi-key');
-    const val = btn.getAttribute('data-multi-val');
-    if (key && val && Array.isArray(state[key]) && !state[key].includes(val)) {
-      state[key].push(val);
-    }
-  });
-  // 슬라이더 동기화
+
+  // 2. 슬라이더 동기화
   document.querySelectorAll('input[type=range]').forEach(inp => {
     if (inp.id in state) state[inp.id] = parseInt(inp.value);
   });
 
-  const payload = { ...state, date: getToday() };
-  // 배열 처리
+  // 3. 선택된 버튼에서 직접 state 갱신 (가장 확실한 방법)
+  document.querySelectorAll('.btn-opt.selected').forEach(btn => {
+    // data 속성 방식
+    const dk = btn.getAttribute('data-selected-key');
+    const dv = btn.getAttribute('data-selected-val');
+    if (dk && dv) { state[dk] = dv; return; }
+    // onclick 텍스트 파싱 (이스케이프 제거 후)
+    const oc = (btn.getAttribute('onclick') || '').replace(/\\'/g, "'");
+    const m = oc.match(/setSingle\('([^']+)','([^']+)'/);
+    if (m) state[m[1]] = m[2];
+  });
+
+  // 4. payload 구성
+  const payload = {};
+  Object.keys(state).forEach(k => {
+    payload[k] = state[k];
+  });
+  payload.date = getToday();
+
+  // 5. 빈 배열 → null
   if (!payload.stress_source || payload.stress_source.length === 0) payload.stress_source = null;
   if (!payload.digestion_yesterday || payload.digestion_yesterday.length === 0) payload.digestion_yesterday = null;
 
+  console.log('저장 payload 버튼값:', {
+    energy: payload.energy_feeling,
+    focus: payload.focus_state,
+    mood: payload.mood,
+    cycle: payload.cycle_phase,
+  });
+
   try {
     const today = getToday();
-    // 오늘 데이터 존재 여부 확인
     const checkRes = await fetch(`${SUPABASE_URL}/rest/v1/daily_log?date=eq.${today}&select=id`, {
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`
-      }
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
     });
     const existing = await checkRes.json();
     const exists = existing && existing.length > 0;
@@ -1397,8 +1405,8 @@ async function saveAll() {
     }
     showToast('✓ 저장되었습니다');
   } catch(e) {
-    showToast('저장 실패: ' + e.message.slice(0,40));
-    console.error(e);
+    showToast('저장 실패: ' + e.message.slice(0,60));
+    console.error('저장 오류:', e);
   }
   btn.disabled = false;
   btn.textContent = '저장';
@@ -1466,7 +1474,7 @@ async function renderHistory() {
             ${d.mood ? `<span class="tag" style="--tag-color:var(--morning)">${d.mood}</span>` : ''}
             ${d.exercise_type ? `<span class="tag" style="--tag-color:var(--day)">${d.exercise_type} ${d.exercise_min||''}분</span>` : ''}
           </div>
-          <button onclick="exportSingleMD(${JSON.stringify(JSON.stringify(d))})" style="font-family:'DM Mono',monospace;font-size:.62rem;padding:5px 12px;background:none;border:1px solid var(--border2);border-radius:3px;color:var(--muted);cursor:pointer" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">📄 .md 내보내기</button>
+          <button onclick="exportSingleMD('${d.date}')" style="font-family:'DM Mono',monospace;font-size:.62rem;padding:5px 12px;background:none;border:1px solid var(--border2);border-radius:3px;color:var(--muted);cursor:pointer" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">📄 .md 내보내기</button>
         </div>
       </div>
     `).join('');
@@ -1476,12 +1484,14 @@ async function renderHistory() {
   }
 }
 
-function exportSingleMD(dateStr) {
-  supaFetch('/daily_log?date=eq.' + dateStr + '&select=*').then(data => {
+async function exportSingleMD(dateStr) {
+  try {
+    showToast('불러오는 중...');
+    const data = await supaFetch('/daily_log?date=eq.' + dateStr + '&select=*');
     if (!data || !data.length) { showToast('데이터 없음'); return; }
     const d = data[0];
     const minToHM = (min) => {
-      if (!min) return '--';
+      if (!min && min !== 0) return '--';
       return Math.floor(min/60) + '시간 ' + (min%60) + '분';
     };
     const yn = (v) => v ? 'Y' : 'N';
@@ -1525,7 +1535,7 @@ tags: daily-log
 ## 소화기 상태
 - 명치:: ${d.digestion_chest || '--'}
 - 식도:: ${d.digestion_esophagus || '--'}
-- 전날:: ${d.digestion_yesterday?.join(', ') || '--'}
+- 전날:: ${d.digestion_yesterday ? d.digestion_yesterday.join(', ') : '--'}
 
 ---
 
@@ -1552,7 +1562,7 @@ tags: daily-log
 ---
 
 # 🧠 Stress / Recovery
-- 스트레스 요인:: ${d.stress_source?.join(', ') || '없음'}
+- 스트레스 요인:: ${d.stress_source ? d.stress_source.join(', ') : '없음'}
 - 산책:: ${yn(d.recovery_walk)}
 - 스트레칭:: ${yn(d.recovery_stretch)}
 - 멍때리기:: ${yn(d.recovery_spacing)}
@@ -1567,12 +1577,19 @@ tags: daily-log
 - 머리 쓰는 검색:: ${yn(d.mental_browsing)}
 `;
     const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    a.href = url;
     a.download = d.date + '-daily-log.md';
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
     showToast('✓ ' + d.date + ' .md 다운로드');
-  }).catch(e => { showToast('내보내기 실패'); console.error(e); });
+  } catch(e) {
+    showToast('내보내기 실패: ' + e.message);
+    console.error(e);
+  }
 }
 
 // ── REVIEW ──
